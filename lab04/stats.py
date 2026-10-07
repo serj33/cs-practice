@@ -34,5 +34,3 @@ def read_valid(lines: list[str]) -> tuple[list[dict], int]:
             errors_count += 1
 
     return valid_records, errors_count
-
-
