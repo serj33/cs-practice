@@ -52,4 +52,14 @@ def average_by_city(records: list[dict]) -> dict:
     return averages
 
 
+def warmest_city(records: list[dict]) -> str:
+    
+    if not records:
+        return ""
+
+    averages = average_by_city(records)
+
+    
+    best_city = min(averages.keys(), key=lambda city: (-averages[city], city))
+    return best_city
 
