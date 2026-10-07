@@ -16,7 +16,7 @@ def parse_record(line: str) -> dict:
     except ValueError as e:
         raise ValueError(f"Температура '{temp_str}' не является числом в строке: '{line}'") from e
 
-    return {"city": city, "temp": temp, "date": date}
+    return {"city": city, "temperature": temp, "date": date}
 
 def read_valid(lines: list[str]) -> tuple[list[dict], int]:
     
