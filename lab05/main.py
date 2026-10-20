@@ -10,8 +10,8 @@ def main():
 
     total = sum(counts.values())
     print(total)
-    print(counts["ERROR"])
-    print(counts["BROKEN"])
+    print(counts["ERROR", 0])
+    print(counts["BROKEN", 0])
 
     with open(filename, encoding="utf-8") as log:
         errors = top_errors(log, 3)

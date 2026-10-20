@@ -10,6 +10,8 @@ def parse_event(line):
         raise ValueError("Неполная строка")
     if s[1] not in LEVELS:
         raise ValueError("Неизвестный уровень")
+    if s[2].strip():
+        raise ValueError("Пустое сообщение")
     
     return {"time": s[0], "level": s[1], "message": s[2]}
 
