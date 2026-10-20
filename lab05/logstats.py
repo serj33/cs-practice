@@ -4,12 +4,14 @@ LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR']
 
 def parse_event(line):
     s = line.split(maxsplit = 2)
+
+
+    if len(s) != 3:
+        raise ValueError("Неполная строка")
+    if s[1] not in LEVELS:
+        raise ValueError("Неизвестный уровень")
     
-    if s[1] in LEVELS and len(s) == 3:
-        d = {'time': s[0], 'level': s[1], 'message': s[2]}
-    else:
-        raise ValueError('негодная строка')
-    return d
+    return {"time": s[0], "level": s[1], "message": s[2]}
 
 def count_levels(lines):
     counts = {}
