@@ -10,7 +10,7 @@ def parse_event(line):
         raise ValueError("Неполная строка")
     if s[1] not in LEVELS:
         raise ValueError("Неизвестный уровень")
-    if s[2].strip():
+    if not s[2].strip():
         raise ValueError("Пустое сообщение")
     
     return {"time": s[0], "level": s[1], "message": s[2]}
@@ -24,7 +24,7 @@ def count_levels(lines):
         try:
             event = parse_event(line)
             level = event['level']
-            counts[level] = counts.get(level,0) + 1
+            counts[level] = counts.get(level, 0) + 1
         except ValueError:
             counts["BROKEN"] = counts.get("BROKEN", 0) + 1
             
