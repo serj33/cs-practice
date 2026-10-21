@@ -3,7 +3,7 @@ from collections import Counter
 LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR']
 
 def parse_event(line):
-    s = line.split(maxsplit = 2)
+    s = line.strip().split(maxsplit = 2)
 
 
     if len(s) != 3:
