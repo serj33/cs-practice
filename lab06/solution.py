@@ -4,7 +4,7 @@ def count_by_extension(paths):
     counts = {}
     for i in paths:
         s = i.split('.')
-        if '.' in i:
+        if '.' in i and not i.startswith('.'):
             level = s[-1].lower()
         else:
             level = ''
