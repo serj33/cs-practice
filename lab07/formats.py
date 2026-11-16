@@ -27,7 +27,7 @@ def parse_settings(lines: list[str]) -> dict:
     current_list = None
 
     for line in lines:
-        line = line.split("#")[0].strip()
+        line = line.split("#", 1)[0].strip()
 
         if not line:
             continue
@@ -37,14 +37,14 @@ def parse_settings(lines: list[str]) -> dict:
                 settings[current_list].append(line[2:].strip())
             continue
 
-        if ":" not in line:
+        key, separator, value = line.partition(":")
+        if not separator:
             continue
 
-        key, value = line.split(":", 1)
         key = key.strip()
         value = value.strip()
 
-        if not value:
+        if value == "":
             settings[key] = []
             current_list = key
             continue
