@@ -20,3 +20,51 @@ def csv_to_records(text: str) -> list[dict]:
 
     return records
 
+
+
+def parse_settings(lines: list[str]) -> dict:
+    settings = {}
+    current_list = None
+
+    for line in lines:
+        line = line.split("#")[0].strip()
+
+        if not line:
+            continue
+
+        if line.startswith("- "):
+            if current_list is not None:
+                settings[current_list].append(line[2:].strip())
+            continue
+
+        if ":" not in line:
+            continue
+
+        key, value = line.split(":", 1)
+        key = key.strip()
+        value = value.strip()
+
+        if not value:
+            settings[key] = []
+            current_list = key
+            continue
+
+        current_list = None
+
+        if value in ("true", "yes"):
+            value = True
+        elif value in ("false", "no"):
+            value = False
+        else:
+            try:
+                value = int(value)
+            except ValueError:
+                try:
+                    value = float(value)
+                except ValueError:
+                    pass
+
+        settings[key] = value
+
+    return settings
+
