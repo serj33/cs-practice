@@ -22,6 +22,7 @@ def csv_to_records(text: str) -> list[dict]:
 
 
 
+
 def parse_settings(lines: list[str]) -> dict:
     settings = {}
     current_list = None
@@ -38,6 +39,7 @@ def parse_settings(lines: list[str]) -> dict:
             continue
 
         key, separator, value = line.partition(":")
+
         if not separator:
             continue
 
@@ -60,13 +62,14 @@ def parse_settings(lines: list[str]) -> dict:
                 value = int(value)
             except ValueError:
                 try:
-                    value = float(value)
+                    value = float(value.replace(",", "."))
                 except ValueError:
                     pass
 
         settings[key] = value
 
     return settings
+
 
 def merge_by_key(rows: list[dict], extra: dict, key: str = "id") -> list[dict]:
     result = []
@@ -88,3 +91,5 @@ def records_to_json(records: list[dict]) -> str:
         indent=2,
         sort_keys=True
     )
+
+print(parse_settings(["rate: 3,5  # с запятой"]))
